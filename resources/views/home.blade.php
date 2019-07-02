@@ -15,6 +15,7 @@
 <table class="home">
     <a href="{{route('customers.index')}}" class="btn btn-info">Danh sách khách hàng</a><br>
     <a href="{{route('cities.index')}}" class="btn btn-info">Danh sách tỉnh</a>
+    <a href="{{route('laravel')}}" class="btn btn-info">Laravel</a>
 </table>
 <div class="container">
     @yield('content')

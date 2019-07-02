@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('laravel');
 Route::group(['prefix'=>'customers'], function (){
     Route::get('/', 'CustomerController@index')->name('customers.index');
     Route::get('/{id}/show', 'CustomerController@show')->name('customers.show');
