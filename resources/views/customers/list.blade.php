@@ -4,12 +4,45 @@
     <div class="col-12">
         <div class="row">
             <div class="text-primary text-center"><h1>Danh sách khách hàng</h1></div>
+
             <div class="col-12">
                 @if(Session::has('success'))
                     <p class="text-success">
                         <i class="fa fa-check" aria-hidden="true"></i>{{ Session::get('success') }}
                     </p>
                 @endif
+
+            </div>
+            <div class="col-6">
+
+                <form class="navbar-form navbar-left" action="{{ route('customers.search') }}" method="get">
+
+                    @csrf
+
+                    <div class="row">
+
+                        <div class="col-8">
+
+                            <div class="form-group">
+
+                                <input type="text" class="form-control" name="keyword" placeholder="Search" value="{{(isset($_GET['keyword'])) ? $_GET['keyword'] : ''}}">
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-4">
+
+                            <button type="submit" class="btn btn-dark">Tìm kiếm</button>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+
             </div>
             <table class="table table-borderless">
                 <thead>
@@ -43,10 +76,8 @@
                             <td><a href="{{'customers.show'}}">
                                     <button type="button" class="btn btn-warning">Xem</button>
                                 </a>
-                            </td>
-                            <td><a class="btn btn-primary" href="{{route('customers.edit', $customer->id)}}">Sửa</a>
-                            </td>
-                            <td><a class="btn btn-danger" href="{{route('customers.destroy', $customer->id)}}"
+                                <a class="btn btn-primary" href="{{route('customers.edit', $customer->id)}}">Sửa</a>
+                                <a class="btn btn-danger" href="{{route('customers.destroy', $customer->id)}}"
                                    onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a>
                             </td>
 
@@ -58,8 +89,8 @@
             </table>
             <a href="{{route('customers.create')}}">
                 <button type="button" class="btn btn-primary">Thêm mới</button>
-
             </a>
+            {{ $customers->appends(request()->query()) }}
         </div>
     </div>
 @endsection
